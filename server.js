@@ -28,6 +28,11 @@ const job = new cron.CronJob('*/5 * * * * *', async () => {
 
 job.start();
 
+app.get('/', (req, res) => {
+  console.log(`Ping received at ${new Date().toISOString()}`);
+  res.send('OK');
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Cron server running on port ${PORT}`);
