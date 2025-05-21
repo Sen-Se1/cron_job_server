@@ -1,0 +1,18 @@
+name: Ping Render Cron Job Server
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'  # every 1 minute
+  workflow_dispatch:       # allows manual triggering
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl Render App Every 50 Seconds
+        run: |
+          for i in {1..2}; do
+            curl -s https://cron-job-server-f9hi.onrender.com > /dev/null
+            echo "Ping $i sent at $(date)"
+            sleep 50
+          done
